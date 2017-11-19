@@ -1,0 +1,11 @@
+<form action="test" method="GET">
+<input type="submit" value="Go to test"></a>
+</form>
+<form action="index" method="POST">
+	{% csrf_token %}
+	<input type="text" name="sentence"> Type your sentence here
+	<input type="submit" value="Submit">
+</form>
+{% for word in pos %}
+<h3>{{word}}</h3>
+{% endfor %}
