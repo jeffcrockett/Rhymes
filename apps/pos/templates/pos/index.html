@@ -1,11 +1,30 @@
-<form action="test" method="GET">
-<input type="submit" value="Go to test"></a>
-</form>
-<form action="index" method="POST">
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+<div class="w3-containe w3-aqua w3-center"><h1>Rhyming Dictionary</h1></div>
+<form class="w3-form w3-teal" action="rhymesbeta" method="POST">
 	{% csrf_token %}
-	<input type="text" name="sentence"> Type your sentence here
-	<input type="submit" value="Submit">
+	<input class="w3-input w3-centered" type="text" name="rhyming-words" placeholder="Type your word here">
+	<br>
+	<input class="w3-input w3-centered" type="submit" value="Get rhyming words">
 </form>
-{% for word in pos %}
-<h3>{{word}}</h3>
+{% if error %}
+{{error}}
+{% endif %}
+<table class="w3-table w3-centered">
+	<tr><th>Showing rhymes for {{word}}</th></tr>
+<tr>
+	{% for rhyme in rhymesbeta %}
+<td>{{rhyme}}</td>
+
+
+</tr>
+
 {% endfor %}
+
+</table>
+</body>
+</html>

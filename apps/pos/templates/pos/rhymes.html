@@ -1,0 +1,11 @@
+{% if error %}
+{{error}}
+{% endif %}
+<table>
+	{% for rhyme in rhymes %}
+	<tr>
+		<td>{{rhyme}}</td>
+	</tr>
+{% endfor %}
+
+</table>
