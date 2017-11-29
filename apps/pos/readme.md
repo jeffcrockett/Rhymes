@@ -1,0 +1,1 @@
+Hi. My name is Jeff Crockett, and here's something I've been working on lately. It's a rhyming dictionary built using Django, which is a Python-based web application framework. The database I'm working with is the Carnegie Mellon University pronunciation dictionary. The data is parsed using code I wrote from scratch.  

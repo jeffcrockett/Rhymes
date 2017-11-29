@@ -1,7 +1,5 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect
-from nltk.corpus import treebank
-from nltk.tree import Tree
 from nltk.corpus import cmudict
 from models import Word
 import re
@@ -18,17 +16,17 @@ for i in PHONEME_STRINGS:
 # WORDS = treebank.words()
 # TRANSCR = cmudict.entries()
 
-# def filtered(w):
-#     soft_sounds = ['L', 'R', 'M', 'N', 'NG']
-#     el = []
-#     for p in range(len(w)):
-#         if len(w[p]) == 3:
-#             el.append(w[p])
-#         elif p > 0 and w[p-1] and w[p] in soft_sounds:
-#             el.append(w[p])
-#         else:
-#             el.append('')
-#     return el
+def filtered(w):
+    soft_sounds = ['L', 'R', 'M', 'N', 'NG']
+    el = []
+    for p in range(len(w)):
+        if len(w[p]) == 3:
+            el.append(w[p])
+        elif p > 0 and w[p-1] and w[p] in soft_sounds:
+            el.append(w[p])
+        else:
+            el.append('')
+    return el
 
 
 def filtered(x):
@@ -53,9 +51,9 @@ def collapsed(x):
 def index(request):
     return render(request, 'pos/index.html')
 
-def test(s):
-    pass
-
+# def test(s):
+#     pass
+#
 def rhymes(request):
     context = {}
     d = cmudict.dict()
@@ -86,7 +84,7 @@ def rhymesbeta(request):
         if word.lower() in PRON_DICT:
             phons = ''.join(PRON_DICT[word.lower()])
             for (a, b) in PHONEME_STRINGS:
-                if re.findall(PATTERN, b) == re.findall(PATTERN, phons) and abs(len(b) - len(phons)) < 5:
+                if re.findall(PATTERN, b) == re.findall(PATTERN, phons) and abs(len(b) - len(phons)) < 3:
                     context['rhymesbeta'].append(a)
     context['word'] = word
     return render(request, 'pos/index.html', context)

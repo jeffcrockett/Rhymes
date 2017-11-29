@@ -1,30 +1,39 @@
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-<body>
-<div class="w3-containe w3-aqua w3-center"><h1>Rhyming Dictionary</h1></div>
-<form class="w3-form w3-teal" action="rhymesbeta" method="POST">
-	{% csrf_token %}
-	<input class="w3-input w3-centered" type="text" name="rhyming-words" placeholder="Type your word here">
-	<br>
-	<input class="w3-input w3-centered" type="submit" value="Get rhyming words">
-</form>
-{% if error %}
-{{error}}
-{% endif %}
-<table class="w3-table w3-centered">
-	<tr><th>Showing rhymes for {{word}}</th></tr>
-<tr>
-	{% for rhyme in rhymesbeta %}
-<td>{{rhyme}}</td>
-
-
-</tr>
-
-{% endfor %}
-
-</table>
-</body>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <style>
+         input {
+         text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="w3-containe w3-teal w3-center">
+         <h1>Slant Rhyme Dictionary</h1>
+      </div>
+      <form class="w3-form w3-teal" action="rhymesbeta" method="POST">
+         {% csrf_token %}
+         <input class="w3-input w3-centered" type="text" name="rhyming-words" placeholder="Type your word here">
+         <br>
+         <input class="w3-input w3-centered" type="submit" value="Get rhyming words">
+      </form>
+      {% if error %}
+      {{error}}
+      {% endif %}
+      <table class="w3-table w3-centered">
+         {% if rhymesbeta %}
+         <tr>
+            <th>Showing rhymes for {{word}}</th>
+         </tr>
+         <tr>
+            {% for rhyme in rhymesbeta %}
+            {% if rhyme != word %}
+            <td>{{rhyme}}</td>
+            {% endif %}
+         </tr>
+         {% endfor %}
+         {% endif %}
+      </table>
+   </body>
 </html>
